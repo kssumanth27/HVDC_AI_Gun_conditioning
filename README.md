@@ -12,6 +12,10 @@ DOI:
 
 Please cite the associated publication if you use this work. A BibTeX citation can be added once the bibliographic details are final.
 
+## Data availability 
+The experimental data supporting this study are available from the corresponding author upon request. Raw and processed experimental data are **not included** in this repository.
+
+
 ## Repository layout
 
 ```text
@@ -49,10 +53,8 @@ tabulate
 
 `tabulate` is used by the optional table-printing calls in `polgun_datacombine.py`. `psutil` and `py-cpuinfo` are optional dependencies used to enrich the training environment report.
 
-## Data availability and expected inputs
 
-The experimental data supporting this study are available from the corresponding author upon request. Raw and processed experimental data are **not included** in this repository.
-
+##Expected Inputs
 The preparation scripts expect CSV files with a `Time` column and diagnostic fields. The cleaning script expects the following fields (missing fields are added as `NaN`, but downstream analyses may require them to contain valid data):
 
 ```text
@@ -247,6 +249,3 @@ If you use this repository, please cite the associated journal article:
 
 > [Complete publication citation to be added when available.]
 
-## Data requests
-
-Experimental data are available from the corresponding author upon reasonable request. 
