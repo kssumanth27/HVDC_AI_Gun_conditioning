@@ -17,8 +17,6 @@ Please cite the associated publication if you use this work. A BibTeX citation c
 ```text
 .
 ├── README.md
-├── requirements.txt                  # Create from the tested environment
-├── .gitignore
 ├── data_preparation/
 │   ├── polgun_datacombine.py
 │   └── polgun__cleaning.py
