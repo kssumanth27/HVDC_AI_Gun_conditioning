@@ -99,7 +99,7 @@ For each CSV in the input folder, this script:
 Output files follow the pattern:
 
 ```text
-processed_<original_name>_uptoMax_plus10.csv
+processed_<original_name>_cleaned.csv
 ```
 
 ### 3. Separate training and held-out test data
