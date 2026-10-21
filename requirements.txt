@@ -1,0 +1,18 @@
+# PolarGun scripts: polgun_datacombine, polgun__cleaning, polgun_train,
+# polgun_test, polgun_correlations, baseline_minirocket_ridge.
+# Python 3.12. torch is the CUDA 12.8 build used on this machine.
+# tabulate: DataFrame.to_markdown() previews in polgun_datacombine.
+# (OPTIONAL): psutil, py-cpuinfo: CPU cores, RAM, and CPU model in polgun_train's 
+# system_and_timing report. Wall-clock timing uses the standard library.
+--extra-index-url https://download.pytorch.org/whl/cu128
+
+numpy==1.26.4
+pandas==2.2.2
+matplotlib==3.11.1
+scikit-learn==1.5.1
+scipy==1.13.1
+torch==2.7.0+cu128
+sktime==1.0.1
+tabulate==0.9.0
+psutil==5.9.0
+py-cpuinfo==9.0.0
