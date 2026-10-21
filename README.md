@@ -155,16 +155,6 @@ python polgun_train.py
 
 By default, this launches **25 independent training processes**, one for each combination of five weight-initialization seeds and five split seeds. To run a single experiment instead, set the environment variable `POLGUN_SINGLE_RUN=1` before executing the script. The single-run defaults are weight-initialization seed `545` and split seed `97`; `POLGUN_WEIGHT_INIT_SEED` and `POLGUN_SPLIT_SEED` can override them.
 
-For each run, the script:
-
-1. Builds overlapping sliding windows with four channels: current, pressure, radiation, and previous action (`Prev_A1`). Each window predicts the action at the following time step.
-2. Maps `VoltageChange=-1` to `0` and forces the next five time steps to `0` in the sequence-processing routine.
-3. Randomly shuffles and splits the windows into 85% training and 15% validation.
-4. Computes normalization statistics from training-window sensor values only; the previous-action channel is not standardized. Missing sensor readings are replaced with `0` after normalization.
-5. Trains with Adam and class-weighted `BCEWithLogitsLoss`, where the positive-class weight is the ratio of training Hold to Increase examples.
-6. Restores weights from the epoch with the lowest validation loss.
-7. Selects a classification threshold from validation predictions, using maximum MCC by default.
-8. Saves the model weights, full checkpoint, learning curves, validation metrics, and training-environment information.
 
 A typical multi-seed output folder contains:
 
@@ -234,7 +224,7 @@ For multi-seed comparisons, corresponding CNN and LSTM checkpoints are matched b
 ### 7. Baseline 
 
 ```bash
-python minirocket_ridge.py
+python minirocket_LR_SGD.py
 ```
 
 Trains the model used for comparison. It produces both MiniROCKET + Ridge classifier and MiniROCKET + Logistic Regression (SGD). The MiniROCKET + Logistic Regression (SGD) model was used for our comparison.
