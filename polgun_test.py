@@ -38,6 +38,7 @@ import argparse
 import glob
 import json
 import os
+import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -660,6 +661,20 @@ def _format_axes(ax):
     ax.grid(True, alpha=0.3)
 
 
+def _csv_name_until_date(csv_path):
+    """CSV stem used in figure filenames, cut after the first 8-digit date.
+
+    ``processed_polgun_voltage_11042020_hz_combined_uptoMax_plus10_Copy``
+    becomes ``processed_polgun_voltage_11042020``. A name with no date is
+    kept as written.
+    """
+    stem = os.path.splitext(os.path.basename(str(csv_path or "csv")))[0]
+    match = re.search(r"\d{8}", stem)
+    if match is None:
+        return stem
+    return stem[:match.end()].rstrip("_- ")
+
+
 def _save_figure(fig, output_folder, basename):
     """Save PDF + high-resolution PNG (600 dpi)."""
     os.makedirs(output_folder, exist_ok=True)
@@ -754,7 +769,7 @@ def _plot_rescaled_voltage(df, results, output_folder, style):
                           markevery=markevery)
         ax.plot(x_model, result["sim_norm"], **kwargs)
 
-    base_name = os.path.splitext(os.path.basename(df.attrs.get("source_csv", "csv")))[0]
+    base_name = _csv_name_until_date(df.attrs.get("source_csv", "csv"))
     ax.set_xlabel(x_label, fontsize=20)
     ax.set_ylabel("Rescaled Voltage", fontsize=20)
     if use_mmss:
@@ -768,7 +783,7 @@ def _plot_rescaled_voltage(df, results, output_folder, style):
     if len(results) > 1:
         plot_basename = f"combined_rescaled_predicted_vs_real_{base_name}_{style}"
     else:
-        plot_basename = f"rescaled_{results[0]['label'].lower()}_predicted_vs_real_{base_name}_{style}"
+        plot_basename = f"{results[0]['label'].lower()}_predict_vs_real_{base_name}_{style}"
     saved_paths = _save_figure(fig, output_folder, plot_basename)
     plt.close(fig)
     return saved_paths
