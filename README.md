@@ -27,6 +27,8 @@ The experimental data supporting this study are available from the corresponding
 ├── polgun_correlations.py
 ├── polgun_train.py
 └── polgun_test.py
+└── minirocket_LR_SGD.py
+
 ```
 
 | Script | Purpose |
@@ -36,24 +38,15 @@ The experimental data supporting this study are available from the corresponding
 | `polgun_correlations.py` | Optional lagged Pearson correlation analysis of current, pressure, and total radiation, aggregated across input files; saves figures and a CSV summary. |
 | `polgun_train.py` | Contains both CNN and LSTM architectures, window construction, training/validation splitting, normalization, model fitting, validation threshold selection, and checkpoint/report generation. |
 | `polgun_test.py` | Loads saved checkpoints, evaluates held-out CSV data, aggregates metrics, and plots predicted versus measured voltage traces after rescaling. |
-| `minirocket_ridge.py` | MiniROCKET + logistic regression (SGD) is the model used for comparison |
+| `minirocket_LR_SGD.py` | MiniROCKET + logistic regression (SGD) is the model used for comparison |
 
 
 ## Requirements
 
-Use a Python environment with the following packages:
-
-```text
-numpy
-pandas
-scipy
-matplotlib
-scikit-learn
-torch
-tabulate
+Required packages can be found in the requirements.txt file and can be installed by running the command:
+```bash
+python -m pip install -r requirements.txt
 ```
-
-`tabulate` is used by the optional table-printing calls in `polgun_datacombine.py`. `psutil` and `py-cpuinfo` are optional dependencies used to enrich the training environment report.
 
 
 ##Expected Inputs
