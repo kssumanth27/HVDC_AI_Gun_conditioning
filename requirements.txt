@@ -1,5 +1,5 @@
 # PolarGun scripts: polgun_datacombine, polgun__cleaning, polgun_train,
-# polgun_test, polgun_correlations, baseline_minirocket_ridge.
+# polgun_test, polgun_correlations, minirocket_LR_SGD.
 # Python 3.12. torch is the CUDA 12.8 build used on this machine.
 # tabulate: DataFrame.to_markdown() previews in polgun_datacombine.
 # (OPTIONAL): psutil, py-cpuinfo: CPU cores, RAM, and CPU model in polgun_train's 
