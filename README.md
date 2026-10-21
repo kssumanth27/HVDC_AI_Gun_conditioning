@@ -33,9 +33,11 @@ The experimental data supporting this study are available from the corresponding
 | --- | --- |
 | `data_preparation/polgun_datacombine.py` | Raw sensor csv files are combined using time stamps. Each sensor data file needs to be combined manually |
 | `data_preparation/polgun__cleaning.py` | Applies voltage cleaning procedure and labelling of data to be used by the polgun_train.py file |
-| `analysis/polgun_correlations.py` | Optional lagged Pearson correlation analysis of current, pressure, and total radiation, aggregated across input files; saves figures and a CSV summary. |
+| `polgun_correlations.py` | Optional lagged Pearson correlation analysis of current, pressure, and total radiation, aggregated across input files; saves figures and a CSV summary. |
 | `polgun_train.py` | Contains both CNN and LSTM architectures, window construction, training/validation splitting, normalization, model fitting, validation threshold selection, and checkpoint/report generation. |
 | `polgun_test.py` | Loads saved checkpoints, evaluates held-out CSV data, aggregates metrics, and plots predicted versus measured voltage traces after rescaling. |
+| `minirocket_ridge.py` | MiniROCKET + logistic regression (SGD) is the model used for comparison |
+
 
 ## Requirements
 
@@ -234,6 +236,16 @@ python polgun_test.py --checkpoint "path/to/cnn_runs" --test "path/to/test_csv_f
 ```
 
 For multi-seed comparisons, corresponding CNN and LSTM checkpoints are matched by run-folder name.
+
+
+### 7. Baseline 
+
+```bash
+python minirocket_ridge.py
+```
+
+Trains the model used for comparison. It produces both MiniROCKET + Ridge classifier and MiniROCKET + Logistic Regression (SGD). The MiniROCKET + Logistic Regression (SGD) model was used for our comparison.
+
 
 ## Reproducibility and release notes
 
